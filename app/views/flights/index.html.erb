@@ -1,5 +1,5 @@
 <h1>SEARCH FOR A FLIGHT</h1>
-<%= form_with url: '/flights', method: :get do |f| %>
+<%= form_with url: '/flights', method: :get, local: true do |f| %>
   <%= f.label :from %>
   <%= f.select :from, ['NYC', 'SFO'] %>
 
@@ -10,14 +10,20 @@
   <%= f.select :passengers, [1, 2, 3, 4] %>
 
   <%= f.label :date %>
-  <%= f.select :date, @flights.map { |flight| flight.start }.uniq %>
+  <%= f.select :date, Flight.distinct_dates.sort %>
 
   <%= f.submit 'Search' %>
 <% end %>
 
 <h1>RESULTS</h1>
-<% @flights.each do |flight| %>
-  <h2>
-    <%= flight.from_airport.name %> -> <%= flight.to_airport.name %>, <%= flight.start %>, <%= distance_of_time_in_words flight.duration %>
-  </h2>
+<% if @flights.nil? || @flights.empty? %>
+  <p>No flights from <%= params[:from] %> to <%= params[:to] %> at <%= params[:date] %>.</p>
+<% else %>
+  <ul>
+    <% @flights.each do |flight| %>
+      <li>
+        <%= flight.from_airport.name %> -> <%= flight.to_airport.name %>, <%= flight.start %>, <%= distance_of_time_in_words flight.duration %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
