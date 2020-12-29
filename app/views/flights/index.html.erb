@@ -10,7 +10,7 @@
   <%= f.select :passengers, [1, 2, 3, 4] %>
 
   <%= f.label :date %>
-  <%= f.select :date, @flights.map { |flight| flight.start } %>
+  <%= f.select :date, @flights.map { |flight| flight.start }.uniq %>
 
   <%= f.submit 'Search' %>
 <% end %>
