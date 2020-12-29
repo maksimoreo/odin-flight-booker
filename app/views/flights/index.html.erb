@@ -1,0 +1,5 @@
+<% @flights.each do |flight| %>
+  <h2>
+    <%= flight.from_airport.name %> -> <%= flight.to_airport.name %>, <%= flight.start %>, <%= distance_of_time_in_words flight.duration %>
+  </h2>
+<% end %>
