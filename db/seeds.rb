@@ -6,5 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Airport.create(name: 'NYC')
-Airport.create(name: 'SFO')
+now = DateTime.now
+
+# Airports
+Airport.delete_all
+nyc = Airport.create(name: 'NYC')
+sfo = Airport.create(name: 'SFO')
+
+# Flights
+Flight.delete_all
+rand(3..6).times do
+  Flight.create(from_airport: nyc, to_airport: sfo,
+    start: now + rand(1..48).hours, duration: rand(4..7).hours.seconds)
+end
+rand(3..6).times do
+  Flight.create(from_airport: sfo, to_airport: nyc,
+    start: now + rand(1..48).hours, duration: rand(4..7).hours.seconds)
+end

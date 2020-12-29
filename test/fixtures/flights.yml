@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_airport: one
+  to_airport: one
+  start: 2020-12-29 16:38:22
+  flight_duration: 1
+
+two:
+  from_airport: two
+  to_airport: two
+  start: 2020-12-29 16:38:22
+  flight_duration: 1
