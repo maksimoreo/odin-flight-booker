@@ -1,3 +1,21 @@
+<h1>SEARCH FOR A FLIGHT</h1>
+<%= form_with url: '/flights', method: :get do |f| %>
+  <%= f.label :from %>
+  <%= f.select :from, ['NYC', 'SFO'] %>
+
+  <%= f.label :to %>
+  <%= f.select :to, ['NYC', 'SFO'] %>
+
+  <%= f.label :passengers, 'Number of passengers:' %>
+  <%= f.select :passengers, [1, 2, 3, 4] %>
+
+  <%= f.label :date %>
+  <%= f.select :date, @flights.map { |flight| flight.start } %>
+
+  <%= f.submit 'Search' %>
+<% end %>
+
+<h1>RESULTS</h1>
 <% @flights.each do |flight| %>
   <h2>
     <%= flight.from_airport.name %> -> <%= flight.to_airport.name %>, <%= flight.start %>, <%= distance_of_time_in_words flight.duration %>

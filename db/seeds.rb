@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-now = DateTime.now
+# Current date and hour
+now = DateTime.now.change(sec: 0, min: 0)
 
 # Airports
 Airport.delete_all
