@@ -10,17 +10,23 @@
 now = DateTime.now.change(sec: 0, min: 0)
 
 # Airports
-Airport.delete_all
+Airport.destroy_all
 nyc = Airport.create(name: 'NYC')
 sfo = Airport.create(name: 'SFO')
 
 # Flights
-Flight.delete_all
+Flight.destroy_all
 rand(3..6).times do
-  Flight.create(from_airport: nyc, to_airport: sfo,
-    start: now + rand(1..48).hours, duration: rand(4..7).hours.seconds)
+  departure_time = now + rand(1..48).hours
+  rand(2..5).times do
+    Flight.create(from_airport: nyc, to_airport: sfo,
+      start: departure_time, duration: rand(4..7).hours.seconds)
+  end
 end
 rand(3..6).times do
-  Flight.create(from_airport: sfo, to_airport: nyc,
-    start: now + rand(1..48).hours, duration: rand(4..7).hours.seconds)
+  departure_time = now + rand(1..48).hours
+  rand(2..5).times do
+    Flight.create(from_airport: sfo, to_airport: nyc,
+      start: departure_time, duration: rand(4..7).hours.seconds)
+  end
 end
