@@ -19,11 +19,12 @@
 <% if @flights.nil? || @flights.empty? %>
   <p>No flights from <%= params[:from] %> to <%= params[:to] %> at <%= params[:date] %>.</p>
 <% else %>
-  <ul>
+  <%= form_with url: 'new_booking_path', method: :get do |f| %>
     <% @flights.each do |flight| %>
-      <li>
-        <%= flight.from_airport.name %> -> <%= flight.to_airport.name %>, <%= flight.start %>, <%= distance_of_time_in_words flight.duration %>
-      </li>
+      <%= f.radio_button :flight_id, flight.id %>
+      <%= f.label ('flight_id_' + flight.id.to_s).to_sym, "#{flight.from_airport.name} -> #{flight.to_airport.name}, #{flight.start}, #{distance_of_time_in_words flight.duration}" %>
+      <br />
     <% end %>
-  </ul>
+    <%= f.submit 'Fly' %>
+  <% end %>
 <% end %>
